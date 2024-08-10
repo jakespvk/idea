@@ -2,20 +2,20 @@ package main
 
 import (
     "fmt"
+    "bufio"
+    "os"
 )
 
 func main() {
+    scanner := bufio.NewScanner(os.Stdin)
+    var db = declareDB()
     fmt.Println("Hello, World!")
-    search("145 Belle Meade Pl")
-}
-
-func declareDB() {
-    db := map[string]string{"145 Belle Meade Pl": "4 stars", "1860 Aquarius St": "3 stars"}
-}
-
-func search(input) {
-	if ok := db[input]; ok {
-		fmt.Println("ok")
-	}
+    for scanner.Scan() {
+        input := scanner.Text()
+        if input == "" {
+            break
+        }
+        search(input, db)
+    }
 }
 
